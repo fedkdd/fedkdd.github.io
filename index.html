@@ -17,7 +17,10 @@
   <meta name="twitter:title" content="FedKDD 2025"/>
   <meta name="twitter:description" content="FedKDD: International Joint Workshop on Federated Learning for Data Mining and Graph Analytics (FedKDD 2025)"/>
   <script>
-    window.location.replace("https://fedkdd.github.io/fedkdd2025/");
+    // 只重定向根目录访问，不影响fedkdd2024的内容
+    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+      window.location.replace("https://fedkdd.github.io/fedkdd2025/");
+    }
   </script>
 </head>
 
