@@ -65,7 +65,49 @@ _**User**_
 _**Assistant**_
 
 我理解您的需求了。您希望：
-1. 保留对 fedkdd2024 内容的访问（如 https://fedkdd.github.io/fedkdd2024/keynotes
+1. 保留对 fedkdd2024 内容的访问（如 https://fedkdd.github.io/fedkdd2024/keynotes）
+2. 但访问根目录 https://fedkdd.github.io/ 时自动重定向到 fedkdd2025
+
+我将修改 index.html 文件，使其只重定向根目录访问，而不影响 fedkdd2024 的内容：
+
+
+---
+
+```diff
+    <meta name="twitter:description" content="FedKDD: International Joint Workshop on Federated Learning for Data Mining and Graph Analytics (FedKDD 2025)"/>
+    <script>
++     // 只重定向根目录访问，不影响fedkdd2024的内容
++     if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        window.location.replace("https://fedkdd.github.io/fedkdd2025/");
++     }
+    </script>
+  </head>
+```
+
+---
+
+很好！我已经成功修改了 index.html 文件。现在这个文件的工作方式如下：
+
+1. 当用户访问根目录 https://fedkdd.github.io/ 或 https://fedkdd.github.io/index.html 时，会自动重定向到 https://fedkdd.github.io/fedkdd2025/
+2. 当用户访问 https://fedkdd.github.io/fedkdd2024/ 或任何子路径（如 https://fedkdd.github.io/fedkdd2024/keynotes）时，不会触发重定向，用户可以正常访问这些内容
+
+这个实现使用了 JavaScript 来检查当前访问的路径，只有当路径是根目录或 index.html 时才执行重定向。这样既保留了 fedkdd2024 的内容访问，又实现了根目录访问时自动跳转到 fedkdd2025 的需求。
+
+您可以通过以下方式测试这个功能：
+1. 访问 https://fedkdd.github.io/ - 应该会自动重定向到 fedkdd2025
+2. 访问 https://fedkdd.github.io/fedkdd2024/keynotes - 应该能正常访问，不会被重定向
+
+---
+
+_**User**_
+
+还是无法改变，还是会跳转到2025
+
+---
+
+_**Assistant**_
+
+
 
 ---
 
